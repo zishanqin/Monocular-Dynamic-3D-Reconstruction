@@ -36,4 +36,4 @@ The results can be viewed in the corresponding ``log/{scene}/{experiment}`` fold
 
 To generate the point cloud for rendered RGB image and depth image, run in the root directory
 
-``python {rgb_pth} {depth_pth} {K_alley/K_cave pth} {pcd_pth}``
+``python pcd_vis.py {rgb_pth} {depth_pth} {K_alley/K_cave pth} {pcd_pth}``
