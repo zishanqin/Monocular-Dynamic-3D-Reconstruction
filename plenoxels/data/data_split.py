@@ -268,8 +268,8 @@ def generate_npy(cam_folder, save_folder):
 
     poses = np.zeros((len(depth_paths), 15))
 
-    min_dpt = 10000
-    max_dpt = -10000
+    min_dpt = float("inf")
+    max_dpt = -float("inf")
 
 
     for i in range(len(cam_paths)):

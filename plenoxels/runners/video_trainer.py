@@ -120,7 +120,6 @@ class VideoTrainer(BaseTrainer):
 
 
     def save_renders(self, dataset, vis=None): 
-        # print('Dataset size', len(dataset))
         per_scene_metrics: Dict[str, Union[float, List]] = defaultdict(list)
         pred_frames, out_depths = [], []
         pb = tqdm(total=len(dataset), desc=f"Validate scene ({dataset.name})")
@@ -133,7 +132,6 @@ class VideoTrainer(BaseTrainer):
             if out_depth is not None:
                 out_depths.append(out_depth)
 
-            # print('out_depth_shape', out_depth)
             for k, v in out_metrics.items():
                 per_scene_metrics[k].append(v)
             pb.set_postfix_str(f"PSNR={out_metrics['psnr']:.2f}", refresh=False)
@@ -241,7 +239,6 @@ def init_tr_data(data_downsample, data_dir, truncation, **kwargs):
 
 def init_ts_data(data_dir, split, truncation, **kwargs):
     downsample = 1.0 # Both D-NeRF and DyNeRF use downsampling by 2
-    # batch=4096 if split == 'train' else None
     dset = Video360Dataset(
         data_dir, split=split, downsample=downsample, truncation=truncation,
         max_cameras=kwargs.get('max_test_cameras', None), max_tsteps=kwargs.get('max_test_tsteps', None),
@@ -249,13 +246,11 @@ def init_ts_data(data_dir, split, truncation, **kwargs):
         near_scaling=float(kwargs.get('near_scaling', 0)), ndc_far=float(kwargs.get('ndc_far', 0)),
         scene_bbox=kwargs['scene_bbox'], depth_gt_dir=kwargs.get("depth_gt_dir"), val_indices=kwargs.get("val_indices")
     )
-    # return {"ts_dset": ts_dset}
     if split == 'train_vis':
         key = 'trdset_save'
     else:
         key = 'ts_dset'
 
-    # exit()
     return {key: dset}
 
 

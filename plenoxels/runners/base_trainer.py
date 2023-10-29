@@ -262,8 +262,6 @@ class BaseTrainer(abc.ABC):
         out_img = preds_rgb#.permute(1,0,2)
         summary = dict()
 
-        # print('-------------------')
-        # print(out_img.shape)
         out_depth = None
         if "depth" in preds:
             out_depth = preds["depth"].cpu().reshape(img_h, img_w)[..., None]
